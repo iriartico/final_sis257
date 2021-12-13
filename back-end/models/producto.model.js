@@ -5,8 +5,8 @@ class Producto {
     this.id_proveedor = producto.id_proveedor;
     this.nombre = producto.nombre;
     this.descripcion = producto.descripcion;
-    this.precioV = producto.precioV;
     this.precioC = producto.precioC;
+    this.precioV = producto.precioV;
   }
 
   static create = (newProducto, result) => {
@@ -65,8 +65,8 @@ class Producto {
 
   static updateById = (id, producto, result) => {
     sql.query(
-      `UPDATE producto SET id_proveedor = ?, nombre = ?, descripcion = ?, precioV = ?, precioC = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
-      [producto.id_proveedor, producto.nombre, producto.descripcion, producto.precioV, producto.precioC, id],
+      `UPDATE producto SET id_proveedor = ?, nombre = ?, descripcion = ?, precioC = ?, precioV = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
+      [producto.id_proveedor, producto.nombre, producto.descripcion, producto.precioC, producto.precioV, id],
       (err, res) => {
         if (err) {
           console.log("error", err);

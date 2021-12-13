@@ -1,19 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const proveedor = require('../controllers/proveedor.controller');
+const { withJWTAuthMiddleware } = require("express-kun");
 
-router.post("/", proveedor.create);
+const proveedor = require("../controllers/proveedor.controller");
+const { SECRET_TOKEN } = require("../config/config");
+const protectedRouter = withJWTAuthMiddleware(router, SECRET_TOKEN);
 
-router.get("/", proveedor.findAll);
+protectedRouter.post("/", proveedor.create);
 
-router.get("/:proveedorId", proveedor.findOne);
+protectedRouter.get("/", proveedor.findAll);
 
-router.put("/:proveedorId", proveedor.update);
+protectedRouter.get("/:proveedorId", proveedor.findOne);
 
-router.delete("/:proveedorId", proveedor.delete);
+protectedRouter.put("/:proveedorId", proveedor.update);
 
-router.delete("/", proveedor.deleteAll);
+protectedRouter.delete("/:proveedorId", proveedor.delete);
 
-
+protectedRouter.delete("/", proveedor.deleteAll);
 
 module.exports = router;

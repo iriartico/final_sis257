@@ -49,8 +49,8 @@
                 <td>{{ index + 1 }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.proveedor }}</td>
-                <td> Bs. {{ producto.precioC }}</td>
-                <td> Bs. {{ producto.precioV }}</td>
+                <td>Bs. {{ producto.precioC }}</td>
+                <td>Bs. {{ producto.precioV }}</td>
                 <td>
                   <button
                     class="btn btn-link"
@@ -70,7 +70,6 @@
           </table>
         </div>
       </div>
-      <!-- <button class="btn btn-link text-left" @click="goHome"></button> -->
     </div>
   </section>
 </template>
@@ -106,9 +105,7 @@ export default {
     },
 
     async deleteProducto(id) {
-      var resp = confirm(
-        "¿Desea elimimar a este item de la Lista de Productos?"
-      );
+      var resp = confirm("¿Desea eliminar este item de la Lista de Productos?");
       if (resp == true) {
         await http.delete("productos/" + id).then(() => this.getProductos());
       }

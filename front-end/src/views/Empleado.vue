@@ -16,54 +16,59 @@
               arial-current="page"
               style="color: white"
             >
-              Clientes
+              Empleados
             </li>
           </ol>
         </nav>
 
         <div class="row">
           <div class="col-12 text-center" style="color: white">
-            <h2>Lista de Clientes</h2>
+            <h2>Lista de Empleados</h2>
           </div>
           <div class="col-12 text-left">
-            <router-link class="breadcrumb-item" to="/clientes/create"
-              ><ion-icon name="person-add-outline"></ion-icon> Crear nuevo
+            <router-link class="breadcrumb-item" to="/empleados/create"
+              ><ion-icon name="add-outline"></ion-icon> Crear nuevo
             </router-link>
           </div>
         </div>
 
         <div class="table container">
-          <table class="table table-dark table-striped" id="tableClients">
+          <table class="table table-dark table-striped" id="tableProducts">
             <thead>
               <tr>
                 <th>N°</th>
-                <th>Nombre</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
                 <th>Usuario</th>
-                <th>Correo</th>
+                <th>Nombre(s)</th>
+                <th>Paterno</th>
+                <th>Materno</th>
+                <th>CI</th>
+                <th>Direccion</th>
+                <th>Sueldo</th>
+                <th>Sucursal</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(cliente, index) in clientes" :key="cliente.id">
+              <tr v-for="(empleado, index) in empleados" :key="empleado.id">
                 <td>{{ index + 1 }}</td>
-                <td>{{ cliente.nombre }}</td>
-                <td>{{ cliente.apellidoP }}</td>
-                <td>{{ cliente.apellidoM }}</td>
-                <td>{{ cliente.usuario }}</td>
-                <td>{{ cliente.email }}</td>
-                <!-- <td>dato user</td> -->
+                <td>{{ empleado.usuario }}</td>
+                <td>{{ empleado.nombre }}</td>
+                <td>{{ empleado.apellidoP }}</td>
+                <td>{{ empleado.apellidoM }}</td>
+                <td>{{ empleado.ci }}</td>
+                <td>{{ empleado.direccion }}</td>
+                <td>{{ empleado.sueldo }}</td>
+                <td>{{ empleado.sucursal }}</td>
                 <td>
                   <button
                     class="btn btn-link"
-                    @click="updateCliente(cliente.id)"
+                    @click="updateEmpleado(empleado.id)"
                   >
                     <ion-icon name="create-outline"></ion-icon> Editar
                   </button>
                   <button
                     class="btn btn-link"
-                    @click="deleteCliente(cliente.id)"
+                    @click="deleteEmpleado(empleado.id)"
                   >
                     <ion-icon name="trash-outline"></ion-icon> Eliminar
                   </button>
@@ -73,7 +78,6 @@
           </table>
         </div>
       </div>
-      <!-- <button class="btn btn-link text-left" @click="goHome"></button> -->
     </div>
   </section>
 </template>
@@ -83,37 +87,35 @@ import http from "../services/http-common";
 export default {
   data() {
     return {
-      clientes: [],
+      empleados: [],
       showParentPage: true,
     };
   },
   created() {
-    this.getClientes();
+    this.getEmpleados();
   },
   beforeRouteUpdate(to, from, next) {
     const toDepth = to.path.split("/").length;
     const fromDepth = from.path.split("/").length;
     this.showParentPage = toDepth < fromDepth;
-    if (this.showParentPage) this.getClientes();
+    if (this.showParentPage) this.getEmpleados();
     next();
   },
   methods: {
-    async getClientes() {
+    async getEmpleados() {
       await http
-        .get("clientes")
-        .then((response) => (this.clientes = response.data));
+        .get("empleados")
+        .then((response) => (this.empleados = response.data));
     },
 
-    updateCliente(id) {
-      this.$router.push("/clientes/update/" + id);
+    updateEmpleado(id) {
+      this.$router.push("/empleados/update/" + id);
     },
 
-    async deleteCliente(id) {
-      var resp = confirm(
-        "¿Desea eliminar este cliente de la Lista de Clientes?"
-      );
+    async deleteEmpleado(id) {
+      var resp = confirm("¿Desea eliminar este item de la Lista de Empleados?");
       if (resp == true) {
-        await http.delete("clientes/" + id).then(() => this.getClientes());
+        await http.delete("empleados/" + id).then(() => this.getEmpleados());
       }
     },
     showParent(show) {

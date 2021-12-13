@@ -1,19 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const empleado = require('../controllers/empleado.controller');
+const { withJWTAuthMiddleware } = require("express-kun");
 
-router.post("/", empleado.create);
+const empleado = require("../controllers/empleado.controller");
+const { SECRET_TOKEN } = require("../config/config");
+const protectedRouter = withJWTAuthMiddleware(router, SECRET_TOKEN);
 
-router.get("/", empleado.findAll);
+protectedRouter.post("/", empleado.create);
 
-router.get("/:empleadoId", empleado.findOne);
+protectedRouter.get("/", empleado.findAll);
 
-router.put("/:empleadoId", empleado.update);
+protectedRouter.get("/:empleadoId", empleado.findOne);
 
-router.delete("/:empleadoId", empleado.delete);
+protectedRouter.put("/:empleadoId", empleado.update);
 
-router.delete("/", empleado.deleteAll);
+protectedRouter.delete("/:empleadoId", empleado.delete);
 
-
+protectedRouter.delete("/", empleado.deleteAll);
 
 module.exports = router;

@@ -6,21 +6,21 @@
           <router-link to="/">Inicio</router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link to="/productos">Productos</router-link>
+          <router-link to="/empleados">Empleados</router-link>
         </li>
         <li
           class="breadcrumb-item active"
           arial-current="page"
           style="color: white"
         >
-          Crear
+          Editar
         </li>
       </ol>
     </nav>
 
     <div class="row">
       <div class="col-12" style="color: white">
-        <h2 class="text-center">Crear Producto</h2>
+        <h2 class="text-center">Editar Empleado</h2>
       </div>
     </div>
 
@@ -30,96 +30,120 @@
           <div class="card-body">
             <form
               class="row g-3 needs-validation blanco"
-              @submit.prevent="sendProducto"
+              @submit.prevent="sendEmpleado"
               novalidate
             >
               <div class="col-md-6">
-                <label class="form-label">Nombre</label>
+                <label class="form-label">Usuario</label>
                 <input
                   type="text"
-                  v-model="producto.nombre"
+                  v-model="empleado.usuario"
                   class="form-control"
-                  placeholder="Nombre del Producto"
+                  placeholder="Nombre de Usuario"
                   required
                 />
               </div>
 
-              <!-- <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Proveedor</label
-                >
-                <input
-                  type="text"
-                  v-model="producto.proveedor"
-                  class="form-control"
-                  placeholder="Proveedores"
-                  required
-                />
-              </div> -->
-
               <div class="col-md-6">
                 <label for="validationCustom02" class="form-label"
-                  >Proveedores</label
+                  >Sucursal</label
                 >
                 <select
-                  v-model="producto.id_proveedor"
+                  v-model="empleado.id_tienda"
                   class="form-select"
                   required
                 >
                   <option
-                    v-for="proveedor in proveedores"
-                    :key="proveedor.id"
-                    :value="proveedor.id"
+                    v-for="sucursal in sucursales"
+                    :key="sucursal.id"
+                    :value="sucursal.id"
                   >
-                    {{ proveedor.nombre }}
+                    {{ sucursal.descripcion }}
                   </option>
                 </select>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-4">
                 <label for="validationCustom02" class="form-label"
-                  >Descripcion</label
+                  >Nombre(s)</label
                 >
                 <input
                   type="text"
-                  v-model="producto.descripcion"
+                  v-model="empleado.nombre"
                   class="form-control"
-                  placeholder="Descripcion del Producto"
+                  placeholder="Nombre(s)"
+                  required
+                />
+              </div>
+
+              <div class="col-md-4">
+                <label for="validationCustom02" class="form-label"
+                  >Paterno</label
+                >
+                <input
+                  type="text"
+                  v-model="empleado.apellidoP"
+                  class="form-control"
+                  placeholder="Apellido Paterno"
+                  required
+                />
+              </div>
+
+              <div class="col-md-4">
+                <label for="validationCustom02" class="form-label"
+                  >Materno</label
+                >
+                <input
+                  type="text"
+                  v-model="empleado.apellidoM"
+                  class="form-control"
+                  placeholder="Apellido Materno"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="validationCustom02" class="form-label">CI</label>
+                <input
+                  type="text"
+                  v-model="empleado.ci"
+                  class="form-control"
+                  placeholder="Cedula de Identidad"
                   required
                 />
               </div>
 
               <div class="col-md-6">
                 <label for="validationCustomUsername" class="form-label"
-                  >Precio de Compra</label
+                  >Direccion</label
                 >
                 <div class="input-group has-validation">
                   <input
                     type="text"
-                    v-model="producto.precioC"
+                    v-model="empleado.direccion"
                     class="form-control"
-                    placeholder="bs."
+                    placeholder="Direccion"
                     required
                   />
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="validationCustom03" class="form-label"
-                  >Precio de Venta</label
+                  >Sueldo</label
                 >
                 <input
                   type="text"
-                  v-model="producto.precioV"
+                  v-model="empleado.sueldo"
                   class="form-control"
-                  placeholder="bs."
+                  placeholder="Sueldo"
                   required
                 />
               </div>
 
               <div class="text-center mt-4">
                 <button class="btn btn-primary" type="submit">
-                  <ion-icon name="save-outline"></ion-icon> Crear
+                  <ion-icon name="save-outline"></ion-icon> Editar
                 </button>
               </div>
             </form>
@@ -138,26 +162,35 @@ import http from "../../services/http-common";
 export default {
   data() {
     return {
-      producto: {
+      empleado: {
+        usuario: "",
         nombre: "",
-        descripcion: "",
-        precioC: "",
-        precioV: "",
+        apellidoP: "",
+        apellidoM: "",
+        ci: "",
+        direccion: "",
+        sueldo: "",
       },
-      proveedores: [],
+      empleadoId: 0,
+      sucursales: [],
     };
   },
   async created() {
     this.$emit("showParent", false);
+    this.empleadoId = this.$route.params.id | 0;
     await http
-      .get("proveedores")
-      .then((response) => (this.proveedores = response.data));
+      .get("empleados/" + this.empleadoId)
+      .then((response) => (this.empleado = response.data));
+
+    await http
+      .get("sucursales")
+      .then((response) => (this.sucursales = response.data));
   },
   methods: {
-    async sendProducto() {
+    async sendEmpleado() {
       await http
-        .post("productos", this.producto)
-        .then(() => this.$router.push("/productos"));
+        .put("empleados/" + this.empleadoId, this.empleado)
+        .then(() => this.$router.push("/empleados"));
     },
     goBack() {
       this.$router.go(-1);

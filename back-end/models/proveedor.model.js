@@ -3,9 +3,9 @@ var sql = require("./db");
 class Proveedor {
   constructor(proveedor) {
     this.nombre = proveedor.nombre;
-    this.nacionalidad = proveedor.nacionalidad;
-    this.direccion = proveedor.direccion;
+    this.pais = proveedor.pais;
     this.ciudad = proveedor.ciudad;
+    this.direccion = proveedor.direccion;
     this.telefono = proveedor.telefono;
   }
 
@@ -57,8 +57,8 @@ class Proveedor {
 
   static updateById = (id, proveedor, result) => {
     sql.query(
-      `UPDATE proveedor SET nombre = ?, nacionalidad = ?, direccion = ?, ciudad = ?, telefono = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
-      [proveedor.nombre, proveedor.nacionalidad, proveedor.direccion, proveedor.ciudad, proveedor.telefono, id],
+      `UPDATE proveedor SET nombre = ?, pais = ?, ciudad = ?, direccion = ?, telefono = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
+      [proveedor.nombre, proveedor.pais, proveedor.ciudad, proveedor.direccion, proveedor.telefono, id],
       (err, res) => {
         if (err) {
           console.log("error", err);

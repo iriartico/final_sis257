@@ -35,7 +35,11 @@
                 ><span>Catalogos</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
-                <li><a href="#">Proveedores</a></li>
+                <li>
+                  <router-link class="nav-link scrollto" to="/proveedores"
+                    >Proveedores</router-link
+                  >
+                </li>
                 <li class="dropdown">
                   <router-link class="nav-link scrollto" to="/productos"
                     >Productos</router-link
@@ -51,7 +55,11 @@
                     >Clientes</router-link
                   >
                 </li>
-                <li><a href="#">Empleados</a></li>
+                <li>
+                  <router-link class="nav-link scrollto" to="/empleados"
+                    >Empleados</router-link
+                  >
+                </li>
                 <li><a href="#">Pedidos</a></li>
               </ul>
             </li>

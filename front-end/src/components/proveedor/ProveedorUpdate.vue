@@ -6,21 +6,21 @@
           <router-link to="/">Inicio</router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link to="/productos">Productos</router-link>
+          <router-link to="/proveedores">Proveedores</router-link>
         </li>
         <li
           class="breadcrumb-item active"
           arial-current="page"
           style="color: white"
         >
-          Crear
+          Editar
         </li>
       </ol>
     </nav>
 
     <div class="row">
       <div class="col-12" style="color: white">
-        <h2 class="text-center">Crear Producto</h2>
+        <h2 class="text-center">Editar Proveedor</h2>
       </div>
     </div>
 
@@ -30,75 +30,54 @@
           <div class="card-body">
             <form
               class="row g-3 needs-validation blanco"
-              @submit.prevent="sendProducto"
+              @submit.prevent="sendProveedor"
               novalidate
             >
               <div class="col-md-6">
                 <label class="form-label">Nombre</label>
                 <input
                   type="text"
-                  v-model="producto.nombre"
+                  v-model="proveedor.nombre"
                   class="form-control"
-                  placeholder="Nombre del Producto"
-                  required
-                />
-              </div>
-
-              <!-- <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Proveedor</label
-                >
-                <input
-                  type="text"
-                  v-model="producto.proveedor"
-                  class="form-control"
-                  placeholder="Proveedores"
-                  required
-                />
-              </div> -->
-
-              <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Proveedores</label
-                >
-                <select
-                  v-model="producto.id_proveedor"
-                  class="form-select"
-                  required
-                >
-                  <option
-                    v-for="proveedor in proveedores"
-                    :key="proveedor.id"
-                    :value="proveedor.id"
-                  >
-                    {{ proveedor.nombre }}
-                  </option>
-                </select>
-              </div>
-
-              <div class="col-md-12">
-                <label for="validationCustom02" class="form-label"
-                  >Descripcion</label
-                >
-                <input
-                  type="text"
-                  v-model="producto.descripcion"
-                  class="form-control"
-                  placeholder="Descripcion del Producto"
+                  placeholder="Nombre del Provedor"
                   required
                 />
               </div>
 
               <div class="col-md-6">
+                <label for="validationCustom02" class="form-label">Pais</label>
+                <input
+                  type="text"
+                  v-model="proveedor.pais"
+                  class="form-control"
+                  placeholder="Pais del Proveedor"
+                  required
+                />
+              </div>
+
+              <div class="col-md-4">
+                <label for="validationCustom02" class="form-label"
+                  >Ciudad</label
+                >
+                <input
+                  type="text"
+                  v-model="proveedor.ciudad"
+                  class="form-control"
+                  placeholder="Ciudad del Proveedor"
+                  required
+                />
+              </div>
+
+              <div class="col-md-8">
                 <label for="validationCustomUsername" class="form-label"
-                  >Precio de Compra</label
+                  >Direccion</label
                 >
                 <div class="input-group has-validation">
                   <input
                     type="text"
-                    v-model="producto.precioC"
+                    v-model="proveedor.direccion"
                     class="form-control"
-                    placeholder="bs."
+                    placeholder="Direccion del Proveedor"
                     required
                   />
                 </div>
@@ -106,20 +85,20 @@
 
               <div class="col-md-6">
                 <label for="validationCustom03" class="form-label"
-                  >Precio de Venta</label
+                  >Telefono</label
                 >
                 <input
                   type="text"
-                  v-model="producto.precioV"
+                  v-model="proveedor.telefono"
                   class="form-control"
-                  placeholder="bs."
+                  placeholder="Telefono"
                   required
                 />
               </div>
 
               <div class="text-center mt-4">
                 <button class="btn btn-primary" type="submit">
-                  <ion-icon name="save-outline"></ion-icon> Crear
+                  <ion-icon name="save-outline"></ion-icon> Guardar
                 </button>
               </div>
             </form>
@@ -138,26 +117,33 @@ import http from "../../services/http-common";
 export default {
   data() {
     return {
-      producto: {
+      proveedor: {
         nombre: "",
-        descripcion: "",
-        precioC: "",
-        precioV: "",
+        pais: "",
+        ciudad: "",
+        direccion: "",
+        telefono: "",
       },
-      proveedores: [],
+      proveedorId: 0,
+      // proveedores: [],
     };
   },
   async created() {
     this.$emit("showParent", false);
+    this.proveedorId = this.$route.params.id | 0;
     await http
-      .get("proveedores")
-      .then((response) => (this.proveedores = response.data));
+      .get("proveedores/" + this.proveedorId)
+      .then((response) => (this.proveedor = response.data));
+
+    // await http
+    //   .get("proveedores")
+    //   .then((response) => (this.proveedores = response.data));
   },
   methods: {
-    async sendProducto() {
+    async sendProveedor() {
       await http
-        .post("productos", this.producto)
-        .then(() => this.$router.push("/productos"));
+        .put("proveedores/" + this.proveedorId, this.proveedor)
+        .then(() => this.$router.push("/proveedores"));
     },
     goBack() {
       this.$router.go(-1);

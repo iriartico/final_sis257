@@ -19,6 +19,24 @@ const routes = [
   //   component: () =>
   //     import(/* webpackChunkName: "about" */ "../views/Products.vue"),
   // },
+
+  {
+    path: "/empleados",
+    name: "Empleado",
+    component: () => import("../views/Empleado.vue"),
+    children: [
+      {
+        path: "create",
+        name: "EmpleadoCreate",
+        component: () => import("../components/empleado/EmpleadoCreate"),
+      },
+      {
+        path: "update/:id",
+        name: "EmpleadoUpdate",
+        component: () => import("../components/empleado/EmpleadoUpdate"),
+      },
+    ],
+  },
   {
     path: "/clientes",
     name: "Cliente",
@@ -33,6 +51,23 @@ const routes = [
         path: "update/:id",
         name: "ClienteUpdate",
         component: () => import("../components/cliente/ClienteUpdate"),
+      },
+    ],
+  },
+  {
+    path: "/proveedores",
+    name: "Proveedor",
+    component: () => import("../views/Proveedor.vue"),
+    children: [
+      {
+        path: "create",
+        name: "ProveedorCreate",
+        component: () => import("../components/proveedor/ProveedorCreate"),
+      },
+      {
+        path: "update/:id",
+        name: "ProveedorUpdate",
+        component: () => import("../components/proveedor/ProveedorUpdate"),
       },
     ],
   },

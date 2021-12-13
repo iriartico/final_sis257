@@ -9,9 +9,9 @@ exports.create = (req, res) => {
 
   const proveedor = new Proveedor({
     nombre: req.body.nombre,
-    nacionalidad: req.body.nacionalidad,
-    direccion: req.body.direccion,
+    pais: req.body.pais,
     ciudad: req.body.ciudad,
+    direccion: req.body.direccion,
     telefono: req.body.telefono,
   });
 

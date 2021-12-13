@@ -16,18 +16,18 @@
               arial-current="page"
               style="color: white"
             >
-              Clientes
+              Proveedores
             </li>
           </ol>
         </nav>
 
         <div class="row">
           <div class="col-12 text-center" style="color: white">
-            <h2>Lista de Clientes</h2>
+            <h2>Lista de Proveedores</h2>
           </div>
           <div class="col-12 text-left">
-            <router-link class="breadcrumb-item" to="/clientes/create"
-              ><ion-icon name="person-add-outline"></ion-icon> Crear nuevo
+            <router-link class="breadcrumb-item" to="/proveedores/create"
+              ><ion-icon name="add-outline"></ion-icon> Crear nuevo
             </router-link>
           </div>
         </div>
@@ -38,32 +38,32 @@
               <tr>
                 <th>N°</th>
                 <th>Nombre</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
-                <th>Usuario</th>
-                <th>Correo</th>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(cliente, index) in clientes" :key="cliente.id">
+              <tr v-for="(proveedor, index) in proveedores" :key="proveedor.id">
                 <td>{{ index + 1 }}</td>
-                <td>{{ cliente.nombre }}</td>
-                <td>{{ cliente.apellidoP }}</td>
-                <td>{{ cliente.apellidoM }}</td>
-                <td>{{ cliente.usuario }}</td>
-                <td>{{ cliente.email }}</td>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.pais }}</td>
+                <td>{{ proveedor.ciudad }}</td>
+                <td>{{ proveedor.direccion }}</td>
+                <td>{{ proveedor.telefono }}</td>
                 <!-- <td>dato user</td> -->
                 <td>
                   <button
                     class="btn btn-link"
-                    @click="updateCliente(cliente.id)"
+                    @click="updateProveedor(proveedor.id)"
                   >
                     <ion-icon name="create-outline"></ion-icon> Editar
                   </button>
                   <button
                     class="btn btn-link"
-                    @click="deleteCliente(cliente.id)"
+                    @click="deleteProveedor(proveedor.id)"
                   >
                     <ion-icon name="trash-outline"></ion-icon> Eliminar
                   </button>
@@ -83,37 +83,39 @@ import http from "../services/http-common";
 export default {
   data() {
     return {
-      clientes: [],
+      proveedores: [],
       showParentPage: true,
     };
   },
   created() {
-    this.getClientes();
+    this.getProveedores();
   },
   beforeRouteUpdate(to, from, next) {
     const toDepth = to.path.split("/").length;
     const fromDepth = from.path.split("/").length;
     this.showParentPage = toDepth < fromDepth;
-    if (this.showParentPage) this.getClientes();
+    if (this.showParentPage) this.getProveedores();
     next();
   },
   methods: {
-    async getClientes() {
+    async getProveedores() {
       await http
-        .get("clientes")
-        .then((response) => (this.clientes = response.data));
+        .get("proveedores")
+        .then((response) => (this.proveedores = response.data));
     },
 
-    updateCliente(id) {
-      this.$router.push("/clientes/update/" + id);
+    updateProveedor(id) {
+      this.$router.push("/proveedores/update/" + id);
     },
 
-    async deleteCliente(id) {
+    async deleteProveedor(id) {
       var resp = confirm(
-        "¿Desea eliminar este cliente de la Lista de Clientes?"
+        "¿Desea elimimar este proveedor de la Lista de Clientes?"
       );
       if (resp == true) {
-        await http.delete("clientes/" + id).then(() => this.getClientes());
+        await http
+          .delete("proveedores/" + id)
+          .then(() => this.getProveedores());
       }
     },
     showParent(show) {

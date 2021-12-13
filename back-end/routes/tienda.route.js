@@ -1,17 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const { withJWTAuthMiddleware } = require("express-kun");
+
 const tienda = require("../controllers/tienda.controller");
+const { SECRET_TOKEN } = require("../config/config");
+const protectedRouter = withJWTAuthMiddleware(router, SECRET_TOKEN);
 
-router.post("/", tienda.create);
+protectedRouter.post("/", tienda.create);
 
-router.get("/", tienda.findAll);
+protectedRouter.get("/", tienda.findAll);
 
-router.get("/:tiendaId", tienda.findOne);
+protectedRouter.get("/:tiendaId", tienda.findOne);
 
-router.put("/:tiendaId", tienda.update);
+protectedRouter.put("/:tiendaId", tienda.update);
 
-router.delete("/:tiendaId", tienda.delete);
+protectedRouter.delete("/:tiendaId", tienda.delete);
 
-router.delete("/", tienda.deleteAll);
+protectedRouter.delete("/", tienda.deleteAll);
 
 module.exports = router;
