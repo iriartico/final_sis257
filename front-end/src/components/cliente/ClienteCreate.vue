@@ -20,7 +20,7 @@
 
     <div class="row">
       <div class="col-12" style="color: white">
-        <h2 class="text-center">Crear Usuario</h2>
+        <h2 class="text-center">Crear Cliente</h2>
       </div>
     </div>
 
@@ -42,13 +42,10 @@
                   placeholder="Nombres"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Apellido Paterno</label
-                >
+                <label class="form-label">Apellido Paterno</label>
                 <input
                   type="text"
                   v-model="cliente.apellidoP"
@@ -56,13 +53,10 @@
                   placeholder="Apellido Paterno"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Apellido Materno</label
-                >
+                <label class="form-label">Apellido Materno</label>
                 <input
                   type="text"
                   v-model="cliente.apellidoM"
@@ -70,13 +64,10 @@
                   placeholder="Apellido Materno"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustomUsername" class="form-label"
-                  >Username</label
-                >
+                <label class="form-label">Username</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend">@</span>
                   <input
@@ -86,14 +77,11 @@
                     aria-describedby="inputGroupPrepend"
                     required
                   />
-                  <!-- <div class="invalid-feedback">Please choose a username.</div> -->
                 </div>
               </div>
 
               <div class="col-md-5">
-                <label for="validationCustom03" class="form-label"
-                  >Correo</label
-                >
+                <label class="form-label">Correo</label>
                 <input
                   type="text"
                   v-model="cliente.email"
@@ -101,13 +89,10 @@
                   placeholder="Ingrese su correo"
                   required
                 />
-                <!-- <div class="invalid-feedback">Please provide a valid city.</div> -->
               </div>
 
               <div class="col-md-3">
-                <label for="validationCustom04" class="form-label"
-                  >Celular</label
-                >
+                <label class="form-label">Celular</label>
                 <input
                   type="text"
                   v-model="cliente.celular"
@@ -115,13 +100,10 @@
                   placeholder="Ingrese su numero"
                   required
                 />
-                <!-- <div class="invalid-feedback">Please select a valid state.</div> -->
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustom05" class="form-label"
-                  >Direccion</label
-                >
+                <label class="form-label">Direccion</label>
                 <input
                   type="text"
                   v-model="cliente.direccion"

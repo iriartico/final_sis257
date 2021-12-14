@@ -45,9 +45,7 @@
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Sucursal</label
-                >
+                <label class="form-label">Sucursal</label>
                 <select
                   v-model="empleado.id_tienda"
                   class="form-select"
@@ -64,9 +62,7 @@
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Nombre(s)</label
-                >
+                <label class="form-label">Nombre(s)</label>
                 <input
                   type="text"
                   v-model="empleado.nombre"
@@ -77,9 +73,7 @@
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Paterno</label
-                >
+                <label class="form-label">Paterno</label>
                 <input
                   type="text"
                   v-model="empleado.apellidoP"
@@ -90,9 +84,7 @@
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Materno</label
-                >
+                <label class="form-label">Materno</label>
                 <input
                   type="text"
                   v-model="empleado.apellidoM"
@@ -103,7 +95,7 @@
               </div>
 
               <div class="col-md-3">
-                <label for="validationCustom02" class="form-label">CI</label>
+                <label class="form-label">CI</label>
                 <input
                   type="text"
                   v-model="empleado.ci"
@@ -114,9 +106,7 @@
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustomUsername" class="form-label"
-                  >Direccion</label
-                >
+                <label class="form-label">Direccion</label>
                 <div class="input-group has-validation">
                   <input
                     type="text"

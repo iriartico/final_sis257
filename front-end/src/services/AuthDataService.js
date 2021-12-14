@@ -8,22 +8,23 @@ export default {
   deleteUserLogged() {
     return Cookies.remove("userLogged");
   },
-  async login(user, password) {
+
+  async login(username, password) {
     var userDB = {};
     await http
-      .post("/usuarios/login", { usuario: user, clave: password })
+      .post("usuarios/login", { usuario: username, clave: password })
       .then((response) => {
         userDB = response.data;
-        if (user == userDB.usuario) {
+        if (username == userDB.usuario) {
           const userCookie = {
-            user: userDB.usuario,
+            username: userDB.usuario,
             rol: userDB.rol,
-            email: user.userDB,
+            email: userDB.email,
           };
           localStorage.setItem("token", userDB.token);
           Cookies.set("userLogged", JSON.stringify(userCookie), {
             expires: (1 / 1440) * 30,
-          }); // 30 minutos
+          }); //minutos para expirar la auteticacion
           return userCookie;
         } else return "";
       });

@@ -20,7 +20,7 @@
 
     <div class="row">
       <div class="col-12" style="color: white">
-        <h2 class="text-center">Editar Usuario</h2>
+        <h2 class="text-center">Editar Cliente</h2>
       </div>
     </div>
 
@@ -42,7 +42,6 @@
                   placeholder="Nombres"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
@@ -54,7 +53,6 @@
                   placeholder="Apellido Paterno"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
@@ -66,7 +64,6 @@
                   placeholder="Apellido Materno"
                   required
                 />
-                <!-- <div class="valid-feedback">Looks good!</div> -->
               </div>
 
               <div class="col-md-4">
@@ -80,7 +77,6 @@
                     aria-describedby="inputGroupPrepend"
                     required
                   />
-                  <!-- <div class="invalid-feedback">Please choose a username.</div> -->
                 </div>
               </div>
 
@@ -93,7 +89,6 @@
                   placeholder="Ingrese su correo"
                   required
                 />
-                <!-- <div class="invalid-feedback">Please provide a valid city.</div> -->
               </div>
 
               <div class="col-md-3">
@@ -105,7 +100,6 @@
                   placeholder="Ingrese su numero"
                   required
                 />
-                <!-- <div class="invalid-feedback">Please select a valid state.</div> -->
               </div>
 
               <div class="col-md-6">
@@ -128,14 +122,12 @@
                     value="0"
                     required
                   />
-                  <label class="form-check-label" for="invalidCheck">
-                    Suscripcion Premium
-                  </label>
+                  <label class="form-check-label"> Suscripcion Premium </label>
                 </div>
               </div>
               <div class="text-center mt-4">
                 <button class="btn btn-primary" type="submit">
-                  <ion-icon name="save-outline"></ion-icon> Editar
+                  <ion-icon name="save-outline"></ion-icon> Guardar
                 </button>
               </div>
             </form>

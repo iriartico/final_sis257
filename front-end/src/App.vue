@@ -11,10 +11,16 @@
 <script>
 // import TopBar from "./components/layout/TopBar.vue";
 import MyHeader from "./components/layout/Header.vue";
-
 import MyFooter from "./components/layout/Footer.vue";
+import Auht from "./services/AuthDataService";
+
 export default {
   components: { MyHeader, MyFooter },
+  data() {
+    return {
+      authenticate: Auht.getUserLogged(),
+    };
+  },
 };
 </script>
 

@@ -6,99 +6,82 @@
           <router-link to="/">Inicio</router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link to="/productos">Productos</router-link>
+          <router-link to="/sucursales">Sucursales</router-link>
         </li>
         <li
           class="breadcrumb-item active"
           arial-current="page"
           style="color: white"
         >
-          Editar
+          Crear
         </li>
       </ol>
     </nav>
 
     <div class="row">
       <div class="col-12" style="color: white">
-        <h2 class="text-center">Editar Producto</h2>
+        <h2 class="text-center">Crear Sucursal</h2>
       </div>
     </div>
 
     <div class="row d-flex justify-content-center">
-      <div class="col-6">
+      <div class="col-5">
         <div class="card aux">
           <div class="card-body">
             <form
-              class="row g-3 needs-validation blanco"
-              @submit.prevent="sendProducto"
+              class="row g-4 blanco"
+              @submit.prevent="sendSucursal"
               novalidate
             >
-              <div class="col-md-6">
-                <label class="form-label">Nombre</label>
-                <input
-                  type="text"
-                  v-model="producto.nombre"
-                  class="form-control"
-                  placeholder="Nombre del Producto"
-                  required
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Proveedores</label>
-                <select
-                  v-model="producto.id_proveedor"
-                  class="form-select"
-                  required
-                >
-                  <option
-                    v-for="proveedor in proveedores"
-                    :key="proveedor.id"
-                    :value="proveedor.id"
-                  >
-                    {{ proveedor.nombre }}
-                  </option>
-                </select>
-              </div>
-
               <div class="col-md-12">
                 <label class="form-label">Descripcion</label>
                 <input
                   type="text"
-                  v-model="producto.descripcion"
+                  v-model="sucursal.descripcion"
                   class="form-control"
-                  placeholder="Descripcion del Producto"
+                  placeholder="Nombre de la Sucursal"
                   required
                 />
               </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Precio de Compra</label>
+              <div class="col-md-12">
+                <label class="form-label">Direccion</label>
+                <input
+                  type="text"
+                  v-model="sucursal.direccion"
+                  class="form-control"
+                  placeholder="Direccion de la Sucursal"
+                  required
+                />
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Zona</label>
                 <div class="input-group has-validation">
                   <input
                     type="text"
-                    v-model="producto.precioC"
+                    v-model="sucursal.zona"
                     class="form-control"
-                    placeholder="bs."
+                    placeholder="Zona de la Sucursal"
                     required
                   />
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Precio de Venta</label>
+              <div class="col-md-12">
+                <label class="form-label">Ciudad</label>
                 <input
                   type="text"
-                  v-model="producto.precioV"
+                  v-model="sucursal.ciudad"
                   class="form-control"
-                  placeholder="bs."
+                  placeholder="Ciudad de la Sucursal"
                   required
                 />
               </div>
 
               <div class="text-center mt-4">
                 <button class="btn btn-primary" type="submit">
-                  <ion-icon name="save-outline"></ion-icon> Guardar
+                  <ion-icon name="save-outline"></ion-icon> Crear
                 </button>
               </div>
             </form>
@@ -117,32 +100,22 @@ import http from "../../services/http-common";
 export default {
   data() {
     return {
-      producto: {
-        nombre: "",
+      sucursal: {
         descripcion: "",
-        precioC: "",
-        precioV: "",
+        direccion: "",
+        zona: "",
+        ciudad: "",
       },
-      productoId: 0,
-      proveedores: [],
     };
   },
-  async created() {
+  created() {
     this.$emit("showParent", false);
-    this.productoId = this.$route.params.id | 0;
-    await http
-      .get("productos/" + this.productoId)
-      .then((response) => (this.producto = response.data));
-
-    await http
-      .get("proveedores")
-      .then((response) => (this.proveedores = response.data));
   },
   methods: {
-    async sendProducto() {
+    async sendSucursal() {
       await http
-        .put("productos/" + this.productoId, this.producto)
-        .then(() => this.$router.push("/productos"));
+        .post("sucursales", this.sucursal)
+        .then(() => this.$router.push("/sucursales"));
     },
     goBack() {
       this.$router.go(-1);

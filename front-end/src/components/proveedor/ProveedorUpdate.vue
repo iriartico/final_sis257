@@ -45,7 +45,7 @@
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustom02" class="form-label">Pais</label>
+                <label class="form-label">Pais</label>
                 <input
                   type="text"
                   v-model="proveedor.pais"
@@ -56,9 +56,7 @@
               </div>
 
               <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"
-                  >Ciudad</label
-                >
+                <label class="form-label">Ciudad</label>
                 <input
                   type="text"
                   v-model="proveedor.ciudad"
@@ -69,9 +67,7 @@
               </div>
 
               <div class="col-md-8">
-                <label for="validationCustomUsername" class="form-label"
-                  >Direccion</label
-                >
+                <label class="form-label">Direccion</label>
                 <div class="input-group has-validation">
                   <input
                     type="text"

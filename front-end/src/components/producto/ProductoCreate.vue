@@ -44,23 +44,8 @@
                 />
               </div>
 
-              <!-- <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Proveedor</label
-                >
-                <input
-                  type="text"
-                  v-model="producto.proveedor"
-                  class="form-control"
-                  placeholder="Proveedores"
-                  required
-                />
-              </div> -->
-
               <div class="col-md-6">
-                <label for="validationCustom02" class="form-label"
-                  >Proveedores</label
-                >
+                <label class="form-label">Proveedores</label>
                 <select
                   v-model="producto.id_proveedor"
                   class="form-select"
@@ -77,9 +62,7 @@
               </div>
 
               <div class="col-md-12">
-                <label for="validationCustom02" class="form-label"
-                  >Descripcion</label
-                >
+                <label class="form-label">Descripcion</label>
                 <input
                   type="text"
                   v-model="producto.descripcion"
@@ -90,9 +73,7 @@
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustomUsername" class="form-label"
-                  >Precio de Compra</label
-                >
+                <label class="form-label">Precio de Compra</label>
                 <div class="input-group has-validation">
                   <input
                     type="text"
@@ -105,9 +86,7 @@
               </div>
 
               <div class="col-md-6">
-                <label for="validationCustom03" class="form-label"
-                  >Precio de Venta</label
-                >
+                <label class="form-label">Precio de Venta</label>
                 <input
                   type="text"
                   v-model="producto.precioV"

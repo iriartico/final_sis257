@@ -44,7 +44,7 @@ exports.findValidate = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Usuario ${req.params.usuario} no encontrado`,
+          message: `Usuario no encontrado`,
         });
       } else {
         res.status(500).send({

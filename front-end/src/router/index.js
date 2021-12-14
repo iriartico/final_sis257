@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import auth from "../services/AuthDataService";
 
 const routes = [
   {
@@ -10,8 +11,12 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    component: () => import("../views/About.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue"),
   },
   // {
   //   path: "/productos",
@@ -20,6 +25,23 @@ const routes = [
   //     import(/* webpackChunkName: "about" */ "../views/Products.vue"),
   // },
 
+  {
+    path: "/sucursales",
+    name: "Sucursal",
+    component: () => import("../views/Sucursal.vue"),
+    children: [
+      {
+        path: "create",
+        name: "SucursalCreate",
+        component: () => import("../components/sucursal/SucursalCreate"),
+      },
+      {
+        path: "update/:id",
+        name: "SucursalUpdate",
+        component: () => import("../components/sucursal/SucursalUpdate"),
+      },
+    ],
+  },
   {
     path: "/empleados",
     name: "Empleado",
@@ -93,6 +115,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ["/", "/login", "/about"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = auth.getUserLogged();
+
+  if (authRequired && !loggedIn) {
+    return next("/login");
+  }
+  next();
 });
 
 export default router;

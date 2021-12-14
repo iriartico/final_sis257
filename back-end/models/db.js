@@ -10,7 +10,7 @@ const connection = mariadb.createConnection({
  
 connection.connect((error) => {
     if(error) throw error;
-    console.log("conectado a la DB");
+    console.log("successfully connected");
 });
 
 module.exports = connection;
