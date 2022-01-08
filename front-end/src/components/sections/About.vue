@@ -21,8 +21,8 @@
           >
             <div class="content">
               <h3>
-                Eum ipsam laborum deleniti
-                <strong>velit pariatur architecto aut nihil</strong>
+                Comparte con nosotros los mejores momentos
+                <strong>estamos a tu disposici&oacute;n, no lo pienses m&aacute;s</strong>
               </h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

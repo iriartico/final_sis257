@@ -7,6 +7,7 @@ class Producto {
     this.descripcion = producto.descripcion;
     this.precioC = producto.precioC;
     this.precioV = producto.precioV;
+    this.stock = producto.stock;
   }
 
   static create = (newProducto, result) => {
@@ -48,7 +49,7 @@ class Producto {
 
   static getAll = (result) => {
     sql.query(
-        `SELECT p.*, pe.nombre as proveedor FROM producto p INNER JOIN proveedor pe 
+      `SELECT p.*, pe.nombre as proveedor FROM producto p INNER JOIN proveedor pe 
         ON p.id_proveedor = pe.id`,
       (err, res) => {
         if (err) {
@@ -65,8 +66,16 @@ class Producto {
 
   static updateById = (id, producto, result) => {
     sql.query(
-      `UPDATE producto SET id_proveedor = ?, nombre = ?, descripcion = ?, precioC = ?, precioV = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
-      [producto.id_proveedor, producto.nombre, producto.descripcion, producto.precioC, producto.precioV, id],
+      `UPDATE producto SET id_proveedor = ?, nombre = ?, descripcion = ?, precioC = ?, precioV = ?, stock = ? WHERE id = ?`, //en los signos ? se reemplaza por el dato del array de abajo
+      [
+        producto.id_proveedor,
+        producto.nombre,
+        producto.descripcion,
+        producto.precioC,
+        producto.precioV,
+        producto.stock,
+        id,
+      ],
       (err, res) => {
         if (err) {
           console.log("error", err);

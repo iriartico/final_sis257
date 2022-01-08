@@ -29,7 +29,7 @@
                   <div>
                     <router-link
                       class="btn-menu animate__animated animate__fadeInUp scrollto"
-                      to="/productos"
+                      to="/products"
                       >Productos</router-link
                     >
                     <!-- <a

@@ -9,6 +9,11 @@ const routes = [
     component: Home,
   },
   {
+    path: "/products",
+    name: "Products",
+    component: () => import("../views/Products.vue"),
+  },
+  {
     path: "/about",
     name: "About",
     component: () => import("../views/About.vue"),
@@ -118,7 +123,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/", "/login", "/about"];
+  const publicPages = ["/", "/login", "/about", "/products"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = auth.getUserLogged();
 

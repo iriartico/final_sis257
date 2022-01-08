@@ -13,6 +13,7 @@ exports.create = (req, res) => {
     descripcion: req.body.descripcion,
     precioV: req.body.precioV,
     precioC: req.body.precioC,
+    stock: req.body.stock,
   });
 
   Producto.create(producto, (err, data) => {

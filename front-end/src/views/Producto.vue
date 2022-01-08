@@ -41,6 +41,7 @@
                 <th>Proveedor</th>
                 <th>Precio-Compra</th>
                 <th>Precio-Venta</th>
+                <th>Stock</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -51,6 +52,7 @@
                 <td>{{ producto.proveedor }}</td>
                 <td>Bs. {{ producto.precioC }}</td>
                 <td>Bs. {{ producto.precioV }}</td>
+                <td>U. {{ producto.stock }}</td>
                 <td>
                   <button
                     class="btn btn-link"

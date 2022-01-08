@@ -25,7 +25,7 @@
             </li>
 
             <li>
-              <router-link class="nav-link scrollto" to="/productos"
+              <router-link class="nav-link scrollto" to="/products"
                 >Productos</router-link
               >
             </li>

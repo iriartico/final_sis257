@@ -96,6 +96,17 @@
                 />
               </div>
 
+              <div class="col-md-6">
+                <label class="form-label">Stock</label>
+                <input
+                  type="text"
+                  v-model="producto.stock"
+                  class="form-control"
+                  placeholder="U."
+                  required
+                />
+              </div>
+
               <div class="text-center mt-4">
                 <button class="btn btn-primary" type="submit">
                   <ion-icon name="save-outline"></ion-icon> Guardar
@@ -122,6 +133,7 @@ export default {
         descripcion: "",
         precioC: "",
         precioV: "",
+        stock: "",
       },
       productoId: 0,
       proveedores: [],
